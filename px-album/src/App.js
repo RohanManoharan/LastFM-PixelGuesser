@@ -5,7 +5,7 @@ import crypto from 'crypto-js';
 // LAST FM ROOT: http://ws.audioscrobbler.com/2.0/
 const apiKey = process.env.REACT_APP_LASTFM_API_KEY;
 const apiSecret = process.env.REACT_APP_LASTFM_SECRET;
-const albums = [];
+const albumInfo = [];
 
 //Login
 const handleLogin = () => {
@@ -43,10 +43,12 @@ axios.get(`http://ws.audioscrobbler.com/2.0/?method=auth.getSession&api_key=${ap
     const albumInfo = albums.map(album => {
       return {
         name: album.name,
-        image: album.image[2]["#text"]
+        image: album.image[3]["#text"]
       };
     });
+
     console.log(albumInfo);
+    console.log(albumInfo[0]);
     // handleAlbums(albums);
   })
   .catch(err => {
@@ -57,12 +59,37 @@ axios.get(`http://ws.audioscrobbler.com/2.0/?method=auth.getSession&api_key=${ap
 //   console.log('In handleAlbums:', albums); // Use albums here
 // }
 
+
+const test = [
+  {
+    name: "The Tale of a Cruel World (Calamity Original Game Soundtrack)",
+    image: "https://lastfm.freetls.fastly.net/i/u/174s/08e266530603dca9437f4f3d2553beef.jpg"
+  },
+  {
+    name: "Another Album Name",
+    image: "https://via.placeholder.com/150"
+  }
+];
+
+// console.log(test[0].name);
+// console.log(test[1].image);
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+let i = getRandomInt(50);
+console.log(i);
+
 function App() {
   return (
     <div>
       <h1>Pixel Album Game</h1>
       <button onClick={handleLogin}>Login with Last.fm</button>
+      <p>{test[0].name}</p>
+      <img src={test[0].image}></img>
     </div>
+    
   );
 }
 
