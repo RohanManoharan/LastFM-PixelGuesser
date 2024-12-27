@@ -40,10 +40,14 @@ axios.get(`http://ws.audioscrobbler.com/2.0/?method=auth.getSession&api_key=${ap
   })
   .then(function (res) {
     const albums = res.data.topalbums.album;
-    console.log('Inside .then:', albums); // Works
-
+    const albumInfo = albums.map(album => {
+      return {
+        name: album.name,
+        image: album.image[2]["#text"]
+      };
+    });
+    console.log(albumInfo);
     // handleAlbums(albums);
-    console.log(albums[0][0]);
   })
   .catch(err => {
     console.log(err.response);
