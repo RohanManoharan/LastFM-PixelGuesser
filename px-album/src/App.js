@@ -48,7 +48,7 @@ axios.get(`http://ws.audioscrobbler.com/2.0/?method=auth.getSession&api_key=${ap
     });
 
     console.log(albumInfo);
-    console.log(albumInfo[0]);
+    // console.log(albumInfo[0]);
     // handleAlbums(albums);
   })
   .catch(err => {
@@ -86,8 +86,8 @@ function App() {
     <div>
       <h1>Pixel Album Game</h1>
       <button onClick={handleLogin}>Login with Last.fm</button>
-      <p>{test[0].name}</p>
-      <img src={test[0].image}></img>
+      <p>{}</p>
+      <img></img>
     </div>
     
   );
