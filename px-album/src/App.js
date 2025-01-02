@@ -31,17 +31,12 @@ function App() {
   // Fetch albums
   useEffect(() => {
     if (token) {
-      axios
-        .get(
-          `http://ws.audioscrobbler.com/2.0/?method=auth.getSession&api_key=${apiKey}&format=json&api_sig=${apiSig}&token=${token}`
-        )
+      axios.get(`http://ws.audioscrobbler.com/2.0/?method=auth.getSession&api_key=${apiKey}&format=json&api_sig=${apiSig}&token=${token}`)
         .then((res) => {
           const userName = res.data.session.name;
 
           // Second API call to get user's top albums
-          return axios.get(
-            `http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${userName}&api_key=${apiKey}&format=json`
-          );
+          return axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${userName}&api_key=${apiKey}&format=json`);
         })
         .then((res) => {
           const albums = res.data.topalbums.album.map((album) => ({
@@ -67,7 +62,7 @@ function App() {
       setAlbumImg(albumInfo[i].image);
       setAlbumName(albumInfo[i].name);
     } else {
-      console.log('No albums available.');
+      document.getElementById("genAlbumError").textContent="Please Login to lastFM first!";
     }
   }
 
@@ -75,9 +70,10 @@ function App() {
     <div>
       <h1>Pixel Album Game</h1>
       <button onClick={handleLogin}>Login with Last.fm</button>
-      <p>{albumName}</p>
-      {albumImg && <img src={albumImg} alt={albumName} />}
+      <p id='ab-name'>{albumName}</p>
+      <img id='ab-img' src={albumImg} alt={albumName} /> <br></br>
       <button onClick={generateRandomAlbum}>Generate</button>
+      <p id="genAlbumError"></p>
     </div>
   );
 }
