@@ -6,7 +6,6 @@ import React, { useState, useEffect} from 'react';
 // LAST FM ROOT: http://ws.audioscrobbler.com/2.0/
 const apiKey = process.env.REACT_APP_LASTFM_API_KEY;
 const apiSecret = process.env.REACT_APP_LASTFM_SECRET;
-// const albumInfo = [];
 
 //Login
 const handleLogin = () => {
@@ -62,54 +61,80 @@ function App() {
       setAlbumImg(albumInfo[i].image);
       setAlbumName(albumInfo[i].name);
     } else {
-      document.getElementById("genAlbumError").textContent="Please Login to lastFM first!";
+      document.getElementById("genAlbumError").textContent =
+        "Please Login to Last.fm first!";
     }
   }
 
-  function pixelateImage(){
-    let c = document.createElement("canvas");
-    let img1 = new Image();
-    img1.crossOrigin = "Anonymous";
+  const pixelateImage = (imageSrc, name) => {
+    const img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.src = imageSrc;
 
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const sampleSize = 20;
 
-    img1.onload = function(){
-      document.getElementById("ab-img").remove();
-      let w = img1.width;
-      let h = img1.height;
+      canvas.width = img.width;
+      canvas.height = img.height;
 
-      c.width = w;
-      c.height = h;
-      let ctx = c.getContext("2d");
-      ctx.drawImage(img1,0,0);
+      ctx.drawImage(img, 0, 0);
 
-      let pixelArr = ctx.getImageData(0,0,w,h).data;
-      let sample_size=20;
+      const pixelData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
-      for (let y=0;y<h;y+=sample_size)
-        for(let x=0;x<w;x+=sample_size){
-      let p = (x+(y*w))*4;
-      ctx.fillStyle = "rgba(" + pixelArr[p] + "," + pixelArr[p+1] + "," + pixelArr[p+2] + "," + pixelArr[p+3] + ")";
-      ctx.fillRect(x,y,sample_size,sample_size);
+      for (let y = 0; y < canvas.height; y += sampleSize) {
+        for (let x = 0; x < canvas.width; x += sampleSize) {
+          const idx = (x + y * canvas.width) * 4;
+          ctx.fillStyle = `rgba(${pixelData[idx]}, ${pixelData[idx + 1]}, ${pixelData[idx + 2]}, ${pixelData[idx + 3]})`;
+          ctx.fillRect(x, y, sampleSize, sampleSize);
+        }
+      }
+
+      const pixelatedImg = new Image();
+      pixelatedImg.src = canvas.toDataURL('image/jpeg');
+      pixelatedImg.alt = name;
+
+      const imgContainer = document.getElementById('img-container');
+      imgContainer.innerHTML = '';
+      imgContainer.appendChild(pixelatedImg);
+
+      const shuffledName = shuffleString(name);
+      setAlbumName(shuffledName);
+    };
+  };
+
+  const shuffleString = (str) => {
+    return str
+      .split(' ')
+      .map((word) => {
+        const letters = word.split('');
+        for (let i = letters.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [letters[i], letters[j]] = [letters[j], letters[i]];
+        }
+        return letters.join('');
+      })
+      .join(' ');
+  };
+
+  useEffect(() => {
+    if (albumImg) {
+      pixelateImage(albumImg, albumName);
     }
+  }, [albumImg]); // Only re-run when albumImg changes
 
 
-      let img2  = new Image();
-      img2.src = c.toDataURL("image/jpeg");
-      img2.width = w;
-      document.body.appendChild(img2);
-    }
-    img1.src = document.getElementById('ab-img').src;
-  }
 
   return (
     <div>
       <h1>Pixel Album Game</h1>
       <button onClick={handleLogin}>Login with Last.fm</button>
       <p id='ab-name'>{albumName} </p>
-      <img id='ab-img' src={albumImg} alt={albumName} /> <br></br>
+      <div id="img-container">
+        <img id="ab-img" src={albumImg} alt={albumName} />
+      </div>
       <button onClick={generateRandomAlbum}>Generate</button>
-      <button onClick={pixelateImage}>Pixelate</button>
-
       <p id="genAlbumError"></p>
     </div>
   );
