@@ -101,6 +101,7 @@ function App() {
 
       const shuffledName = shuffleString(name);
       setAlbumName(shuffledName);
+      console.log(shuffledName);
     };
   };
 
@@ -118,13 +119,16 @@ function App() {
       .join(' ');
   };
 
+  // On Album change, pixelate and shuffle 
   useEffect(() => {
     if (albumImg) {
       pixelateImage(albumImg, albumName);
     }
-  }, [albumImg]); // Only re-run when albumImg changes
+  }, [albumImg]);
 
 
+  console.log(albumImg);
+  console.log(albumName);
 
   return (
     <div>
@@ -136,6 +140,7 @@ function App() {
       </div>
       <button onClick={generateRandomAlbum}>Generate</button>
       <p id="genAlbumError"></p>
+      <input type='text' placeholder='Guess'></input>
     </div>
   );
 }
