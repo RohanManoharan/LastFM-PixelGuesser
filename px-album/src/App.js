@@ -26,6 +26,8 @@ function App() {
   const [albumInfo, setAlbumInfo] = useState([]);
   const [albumImg, setAlbumImg] = useState('');
   const [albumName, setAlbumName] = useState('');
+  const [shuffledName, setshuffledName] = useState('');
+
 
   // Fetch albums
   useEffect(() => {
@@ -100,7 +102,7 @@ function App() {
       imgContainer.appendChild(pixelatedImg);
 
       const shuffledName = shuffleString(name);
-      setAlbumName(shuffledName);
+      setshuffledName(shuffledName);
       console.log(shuffledName);
     };
   };
@@ -126,21 +128,47 @@ function App() {
     }
   }, [albumImg]);
 
+  function handleGuess(){
+    const guess = document.getElementById('playerGuess').value;
+    console.log(guess.toLowerCase());
+    if (guess.toLowerCase() === albumName.toLowerCase()){
+      document.getElementById("successMsg").textContent =
+      "Yay!";
+      generateRandomAlbum();
+      document.getElementById('playerGuess').value = "";
+    }
+    else{
+      document.getElementById("successMsg").textContent =
+      "Boo!";
+    }
+  }
 
-  console.log(albumImg);
-  console.log(albumName);
+  const reshuffleAlbumName = () => {
+    if (albumName) {
+      const reshuffledName = shuffleString(albumName);
+      setshuffledName(reshuffledName);
+      console.log(reshuffledName);
+    }
+  };
+
+  // console.log(albumImg);
+  // console.log(albumName);
 
   return (
     <div>
       <h1>Pixel Album Game</h1>
       <button onClick={handleLogin}>Login with Last.fm</button>
-      <p id='ab-name'>{albumName} </p>
+      <p id='ab-name'>{shuffledName} </p>
       <div id="img-container">
         <img id="ab-img" src={albumImg} alt={albumName} />
       </div>
       <button onClick={generateRandomAlbum}>Generate</button>
       <p id="genAlbumError"></p>
-      <input type='text' placeholder='Guess'></input>
+      <input id='playerGuess' type='text' placeholder='Guess'></input>
+      <button onClick={handleGuess}>Submit</button>
+      <p id="successMsg"></p>
+      <button onClick={reshuffleAlbumName}>Reshuffle</button>
+
     </div>
   );
 }
