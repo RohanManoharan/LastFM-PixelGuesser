@@ -24,7 +24,7 @@ const apiSig = crypto.MD5(
 
 function App() {
   const [albumInfo, setAlbumInfo] = useState([]);
-  const [albumImg, setAlbumImg] = useState('');
+  const [albumImg, setAlbumImg] = useState('https://placehold.co/300');
   const [albumName, setAlbumName] = useState('');
   const [shuffledName, setshuffledName] = useState('');
 
@@ -164,13 +164,20 @@ function App() {
 
 <div id='gameContent'>
   <div id='generatedAlbum'>
-          <p id='ab-name'>{shuffledName} </p>
+          <p id='ab-name'>{shuffledName}</p>
           <div id="img-container">
             <img id="ab-img" src={albumImg} alt={albumName} />
           </div>
           
           {albumInfo.length > 0 && (
-            <><input id='playerGuess' type='text' placeholder='Guess' /> <br /><br /></>)}
+            <>
+            <form>
+              <input id='playerGuess' type='text' placeholder='Guess' />
+              <button id='submit' onClick={handleGuess}>Submit</button>
+            </form>
+            </>
+          )}
+            
 
         </div>
       
@@ -179,7 +186,6 @@ function App() {
           {albumInfo.length > 0 && (
             <>
               <button onClick={generateRandomAlbum}>Generate</button> <br />
-              <button onClick={handleGuess}>Submit</button> <br />
               <button onClick={reshuffleAlbumName}>Reshuffle</button>
             </>
           )}

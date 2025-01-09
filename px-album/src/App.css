@@ -41,6 +41,10 @@ body {
     height: 80vh; /* Adjust for your content height */
 }
 
+#ab-img{
+    height: 300px;
+    width: 300px;
+}
 #generatedAlbum {
     display: flex;
     flex-direction: column;
@@ -74,3 +78,13 @@ body {
 #successMsg {
     margin-top: 20px;
 }
+
+#form:focus-within {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
+    transform: translateY(-1px);
+  }
+  
+  #playerGuess:placeholder-shown + #submit:not(:focus) {
+    opacity: .5;
+    pointer-events: none;
+  }
