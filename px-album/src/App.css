@@ -1,3 +1,76 @@
-body{
-    text-align: center;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#navbar {
+    background: #121212;
+    border-bottom: #EAEAEA;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+#title {
+    color: white;
+    padding: 15px 32px;
+}
+
+#login {
+    background-color: #121212;
+    border-radius: 25px;
+    border-color: #EAEAEA;
+    color: white;
+    padding: 15px 32px;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#login:hover {
+    background-color: #EAEAEA;
+    border-color: #121212;
+    color: #121212;
+}
+
+#gameContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 80vh; /* Adjust for your content height */
+}
+
+#generatedAlbum {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px; /* Spacing between album content and buttons */
+}
+
+#buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+#buttons button {
+    margin-bottom: 10px; /* Space between buttons */
+}
+
+#img-container {
+    margin-top: 10px;
+}
+
+#playerGuess {
+    margin-top: 10px;
+    padding: 10px;
+    width: 200px; /* Adjust the input width */
+}
+
+#successMsg {
+    margin-top: 20px;
 }

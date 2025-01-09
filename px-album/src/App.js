@@ -156,20 +156,40 @@ function App() {
 
   return (
     <div>
-      <h1>Pixel Album Game</h1>
-      <button onClick={handleLogin}>Login with Last.fm</button>
-      <p id='ab-name'>{shuffledName} </p>
-      <div id="img-container">
-        <img id="ab-img" src={albumImg} alt={albumName} />
+      <div id='navbar'>
+        <h1 id='title'>Pixel Guesser</h1>
+        <button id='login' onClick={handleLogin}>Login with Last.fm</button>
       </div>
-      <button onClick={generateRandomAlbum}>Generate</button>
-      <p id="genAlbumError"></p>
-      <input id='playerGuess' type='text' placeholder='Guess'></input>
-      <button onClick={handleGuess}>Submit</button>
-      <p id="successMsg"></p>
-      <button onClick={reshuffleAlbumName}>Reshuffle</button>
 
-    </div>
+
+<div id='gameContent'>
+  <div id='generatedAlbum'>
+          <p id='ab-name'>{shuffledName} </p>
+          <div id="img-container">
+            <img id="ab-img" src={albumImg} alt={albumName} />
+          </div>
+          
+          {albumInfo.length > 0 && (
+            <><input id='playerGuess' type='text' placeholder='Guess' /> <br /><br /></>)}
+
+        </div>
+      
+        <div id='buttons'>
+          <p id="genAlbumError"></p>
+          {albumInfo.length > 0 && (
+            <>
+              <button onClick={generateRandomAlbum}>Generate</button> <br />
+              <button onClick={handleGuess}>Submit</button> <br />
+              <button onClick={reshuffleAlbumName}>Reshuffle</button>
+            </>
+          )}
+        </div>
+
+
+        <p id="successMsg"></p>
+      </div>
+</div>
+      
   );
 }
 
