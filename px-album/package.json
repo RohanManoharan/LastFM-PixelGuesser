@@ -2,6 +2,7 @@
   "name": "px-album",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://RohanManoharan.github.io/LastFM-PixelGuesser",
   "dependencies": {
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
@@ -13,6 +14,8 @@
     "react-scripts": "^5.0.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -37,6 +40,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "web-vitals": "^4.2.4"
   }
 }
