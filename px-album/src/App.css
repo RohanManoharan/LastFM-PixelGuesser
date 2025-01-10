@@ -38,13 +38,8 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    height: 80vh; /* Adjust for your content height */
 }
 
-#ab-img{
-    height: 300px;
-    width: 300px;
-}
 #generatedAlbum {
     display: flex;
     flex-direction: column;
@@ -53,17 +48,8 @@ body {
     margin-right: 30px; /* Spacing between album content and buttons */
 }
 
-#buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-top: 20px;
-}
 
-#buttons button {
-    margin-bottom: 10px; /* Space between buttons */
-}
+
 
 #img-container {
     margin-top: 10px;
@@ -79,12 +65,52 @@ body {
     margin-top: 20px;
 }
 
-#form:focus-within {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
-    transform: translateY(-1px);
+#guess-container {
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    margin: 20px; 
   }
   
-  #playerGuess:placeholder-shown + #submit:not(:focus) {
-    opacity: .5;
-    pointer-events: none;
+  #guess {
+    padding: 10px; 
+    font-size: 16px; 
+    border: 2px solid #FF5722 ; 
+    border-radius: 5px; 
+    outline: none; 
+    transition: border-color 0.3s ease; 
+  }
+  
+  #guess:focus {
+    border-color: #E64A19 ; 
+  }
+  
+  #buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+
+  #submit, #genAlbum, #reshuffle {
+    padding: 10px 20px; 
+    font-size: 16px;
+    color: #ffffff; 
+    background-color: #FF5722 ;
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+  }
+  
+  #submit:hover {
+    background-color: #E64A19 ; 
+  }
+  
+  #submit:active {
+    background-color: #FF5722 ; 
+  }
+
+  #successMsg{
+    text-align: center;
   }

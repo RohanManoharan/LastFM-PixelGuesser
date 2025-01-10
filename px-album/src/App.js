@@ -3,6 +3,9 @@ import axios from 'axios';
 import crypto from 'crypto-js';
 import React, { useState, useEffect} from 'react';
 
+const jsConfetti = new JSConfetti()
+jsConfetti.addConfetti()
+
 // LAST FM ROOT: http://ws.audioscrobbler.com/2.0/
 const apiKey = process.env.REACT_APP_LASTFM_API_KEY;
 const apiSecret = process.env.REACT_APP_LASTFM_SECRET;
@@ -19,8 +22,7 @@ const token = params.get('token');
 
 // Hash apiSig
 const apiSig = crypto.MD5(
-  `api_key${apiKey}methodauth.getSessiontoken${token}${apiSecret}`
-).toString();
+  `api_key${apiKey}methodauth.getSessiontoken${token}${apiSecret}`).toString();
 
 function App() {
   const [albumInfo, setAlbumInfo] = useState([]);
@@ -128,14 +130,15 @@ function App() {
     }
   }, [albumImg]);
 
-  function handleGuess(){
-    const guess = document.getElementById('playerGuess').value;
+  function handleGuess(event){
+    event.preventDefault();
+    const guess = document.getElementById('guess').value;
     console.log(guess.toLowerCase());
     if (guess.toLowerCase() === albumName.toLowerCase()){
       document.getElementById("successMsg").textContent =
       "Yay!";
       generateRandomAlbum();
-      document.getElementById('playerGuess').value = "";
+      document.getElementById('guess').value = "";
     }
     else{
       document.getElementById("successMsg").textContent =
@@ -168,31 +171,20 @@ function App() {
           <div id="img-container">
             <img id="ab-img" src={albumImg} alt={albumName} />
           </div>
-          
           {albumInfo.length > 0 && (
-            <>
-            <form>
-              <input id='playerGuess' type='text' placeholder='Guess' />
+            <><form id='guess-container'>
+              <input id='guess' type='text' placeholder='Guess' />
               <button id='submit' onClick={handleGuess}>Submit</button>
-            </form>
-            </>
+            </form></>
           )}
-            
-
-        </div>
-      
+  </div>
         <div id='buttons'>
           <p id="genAlbumError"></p>
           {albumInfo.length > 0 && (
-            <>
-              <button onClick={generateRandomAlbum}>Generate</button> <br />
-              <button onClick={reshuffleAlbumName}>Reshuffle</button>
-            </>
+            <><button id='genAlbum' onClick={generateRandomAlbum}>Generate</button> <br />
+              <button id='reshuffle' onClick={reshuffleAlbumName}>Reshuffle</button></>
           )}
         </div>
-
-
-        <p id="successMsg"></p>
       </div>
 </div>
       
