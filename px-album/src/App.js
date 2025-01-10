@@ -66,8 +66,7 @@ function App() {
       setAlbumImg(albumInfo[i].image);
       setAlbumName(albumInfo[i].name);
     } else {
-      document.getElementById("genAlbumError").textContent =
-        "Please Login to Last.fm first!";
+      console.log("Please Login to Last.fm first!");
     }
   }
 
@@ -175,7 +174,6 @@ function App() {
           )}
   </div>
         <div id='buttons'>
-          <p id="genAlbumError"></p>
           {albumInfo.length > 0 && (
             <><button id='genAlbum' onClick={generateRandomAlbum}>Generate</button> <br />
               <button id='reshuffle' onClick={reshuffleAlbumName}>Reshuffle</button></>
