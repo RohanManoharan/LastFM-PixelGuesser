@@ -2,9 +2,10 @@ import './App.css';
 import axios from 'axios';
 import crypto from 'crypto-js';
 import React, { useState, useEffect} from 'react';
+import JSConfetti from 'js-confetti';
 
 const jsConfetti = new JSConfetti()
-jsConfetti.addConfetti()
+
 
 // LAST FM ROOT: http://ws.audioscrobbler.com/2.0/
 const apiKey = process.env.REACT_APP_LASTFM_API_KEY;
@@ -135,14 +136,9 @@ function App() {
     const guess = document.getElementById('guess').value;
     console.log(guess.toLowerCase());
     if (guess.toLowerCase() === albumName.toLowerCase()){
-      document.getElementById("successMsg").textContent =
-      "Yay!";
+      jsConfetti.addConfetti()
       generateRandomAlbum();
       document.getElementById('guess').value = "";
-    }
-    else{
-      document.getElementById("successMsg").textContent =
-      "Boo!";
     }
   }
 
