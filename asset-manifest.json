@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/LastFM-PixelGuesser/static/css/main.a9abbc24.css",
-    "main.js": "/LastFM-PixelGuesser/static/js/main.26dc7bef.js",
+    "main.js": "/LastFM-PixelGuesser/static/js/main.5ff7dfad.js",
     "static/js/488.9ce55d82.chunk.js": "/LastFM-PixelGuesser/static/js/488.9ce55d82.chunk.js",
     "index.html": "/LastFM-PixelGuesser/index.html",
     "main.a9abbc24.css.map": "/LastFM-PixelGuesser/static/css/main.a9abbc24.css.map",
-    "main.26dc7bef.js.map": "/LastFM-PixelGuesser/static/js/main.26dc7bef.js.map",
+    "main.5ff7dfad.js.map": "/LastFM-PixelGuesser/static/js/main.5ff7dfad.js.map",
     "488.9ce55d82.chunk.js.map": "/LastFM-PixelGuesser/static/js/488.9ce55d82.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a9abbc24.css",
-    "static/js/main.26dc7bef.js"
+    "static/js/main.5ff7dfad.js"
   ]
 }
