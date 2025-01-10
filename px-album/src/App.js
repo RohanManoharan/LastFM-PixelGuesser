@@ -13,7 +13,7 @@ const apiSecret = process.env.REACT_APP_LASTFM_SECRET;
 
 //Login
 const handleLogin = () => {
-  const lastFmAuthUrl = `http://www.last.fm/api/auth/?api_key=${apiKey}&cb=https://rohanmanoharan.github.io/LastFM-PixelGuesser/`;
+  const lastFmAuthUrl = `https://www.last.fm/api/auth/?api_key=${apiKey}&cb=https://rohanmanoharan.github.io/LastFM-PixelGuesser/`;
   window.location.href = lastFmAuthUrl;
 };
 
@@ -35,12 +35,12 @@ function App() {
   // Fetch albums
   useEffect(() => {
     if (token) {
-      axios.get(`http://ws.audioscrobbler.com/2.0/?method=auth.getSession&api_key=${apiKey}&format=json&api_sig=${apiSig}&token=${token}`)
+      axios.get(`https://ws.audioscrobbler.com/2.0/?method=auth.getSession&api_key=${apiKey}&format=json&api_sig=${apiSig}&token=${token}`)
         .then((res) => {
           const userName = res.data.session.name;
 
           // Second API call to get user's top albums
-          return axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${userName}&api_key=${apiKey}&format=json`);
+          return axios.get(`https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${userName}&api_key=${apiKey}&format=json`);
         })
         .then((res) => {
           const albums = res.data.topalbums.album.map((album) => ({
