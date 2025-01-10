@@ -13,7 +13,7 @@ const apiSecret = process.env.REACT_APP_LASTFM_SECRET;
 
 //Login
 const handleLogin = () => {
-  const lastFmAuthUrl = `http://www.last.fm/api/auth/?api_key=${apiKey}&cb=http://localhost:3000`;
+  const lastFmAuthUrl = `http://www.last.fm/api/auth/?api_key=${apiKey}&cb=http://https://rohanmanoharan.github.io/LastFM-PixelGuesser/`;
   window.location.href = lastFmAuthUrl;
 };
 
